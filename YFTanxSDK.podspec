@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'YFTanxSDK'
-    s.version          = '3.5.2.1'
+    s.version          = '3.5.2.2'
     s.summary          = 'A short description of YFTanxSDK.'
     
     # This description is used to generate tags and improve search results.
@@ -27,8 +27,9 @@ Pod::Spec.new do |s|
     s.source           = { :git => 'https://github.com/com-yifan/YFTanxSDK.git', :tag => s.version.to_s }
     
     s.platform = :ios, "12.0"
-    s.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO', 'VALID_ARCHS' => valid_archs.join(' '), 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
-    s.user_target_xcconfig = { 'ENABLE_BITCODE' => 'NO', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+     valid_archs = ['i386', 'armv7', 'x86_64', 'arm64']
+   s.pod_target_xcconfig = {'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'x86_64 arm64' }
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'x86_64 arm64' }
     s.frameworks = 'AdSupport','CoreMotion','CoreTelephony','SystemConfiguration','WebKit'
     s.libraries = 'resolv','sqlite3','z'
     
@@ -38,5 +39,10 @@ Pod::Spec.new do |s|
         ss.vendored_frameworks = 'YFTanxSDK/SDK/*.framework'
         ss.resource = 'YFTanxSDK/SDK/*.bundle'
     end
+
+  s.xcconfig = {
+      'VALID_ARCHS' =>  valid_archs.join(' '),
+  }
+
     
 end
